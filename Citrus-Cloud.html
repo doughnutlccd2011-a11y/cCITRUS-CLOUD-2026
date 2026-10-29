@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eaf5df">
+  <title>Citrus Cloud | Freshness in Every Sip</title>
+
+  <style>
+    :root {
+      --dark: #205b35;
+      --green: #367c49;
+      --lime: #b9dc91;
+      --pale: #edf7e5;
+      --cream: #fffdf2;
+      --text: #294c34;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: rgba(255, 253, 242, 0.96);
+      padding: 16px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 3px 15px #205b3510;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #85b957;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      padding: 9px 17px;
+      border: 1px solid #c3d8b5;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: 0.25s;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: var(--dark);
+      color: white;
+    }
+
+    .hero {
+      min-height: 570px;
+      padding: 65px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 35px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 90% 20%, #d6edb7 0, transparent 34%),
+        linear-gradient(135deg, #edf7e5, #d9edc3);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      color: var(--dark);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.03;
+      letter-spacing: -3px;
+      margin: 15px 0 22px;
+    }
+
+    .hero p {
+      max-width: 460px;
+      font-size: 1.08rem;
+      margin-bottom: 25px;
+    }
+
+    .hero strong {
+      color: var(--green);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--dark);
+      color: white;
+      border-radius: 30px;
+      padding: 13px 25px;
+      font-weight: bold;
+      border: 2px solid var(--dark);
+      transition: 0.25s;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: #4c8e4b;
+      border-color: #4c8e4b;
+      transform: translateY(-2px);
+    }
+
+    .drink-scene {
+      min-height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .orb {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      background: #c6e6a5;
+      border-radius: 50%;
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #6a9e4e;
+      font-size: 2rem;
+    }
+
+    .sparkle.one { top: 40px; right: 13%; }
+    .sparkle.two { bottom: 45px; left: 7%; }
+    .sparkle.three { top: 90px; left: 10%; }
+
+    /* CSS-drawn product glass: no image download required */
+    .glass {
+      width: 210px;
+      height: 325px;
+      position: relative;
+      z-index: 2;
+      margin-top: 25px;
+      border: 5px solid #ffffffc9;
+      border-top: 9px solid #ffffffed;
+      border-radius: 15px 15px 35px 35px;
+      overflow: hidden;
+      transform: perspective(700px) rotate(-3deg);
+      background: linear-gradient(
+        to bottom,
+        #a8dfc3 0%,
+        #4dbb80 19%,
+        #25a867 44%,
+        #dff1c7 72%,
+        #fff9e9 100%
+      );
+      box-shadow: 15px 22px 35px #285f3530,
+                  inset 8px 0 12px #ffffff6b,
+                  inset -9px 0 10px #164e3530;
+    }
+
+    .glass::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      width: 20px;
+      height: 245px;
+      border-radius: 30px;
+      background: #ffffff6b;
+    }
+
+    .glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 60% 20%, #ffffffb8 2px, transparent 4px),
+        radial-gradient(circle at 40% 30%, #ffffffb8 3px, transparent 5px),
+        radial-gradient(circle at 72% 40%, #ffffffb8 2px, transparent 4px),
+        radial-gradient(circle at 35% 48%, #ffffffb8 2px, transparent 4px),
+        radial-gradient(circle at 65% 58%, #ffffffb8 3px, transparent 5px),
+        radial-gradient(circle at 45% 66%, #ffffffb8 2px, transparent 4px),
+        radial-gradient(circle at 80% 75%, #ffffffb8 2px, transparent 4px);
+      pointer-events: none;
+    }
+
+    .foam {
+      position: absolute;
+      height: 15px;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #f9fff0;
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .ice {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      left: 25px;
+      width: 48px;
+      height: 38px;
+      background: #eaffffb8;
+      border: 2px solid #ffffffbd;
+      border-radius: 9px;
+      transform: rotate(20deg);
+      box-shadow: 56px 5px 0 -2px #eaffffb8,
+                  93px 18px 0 -4px #eaffffb8;
+    }
+
+    .lemon {
+      position: absolute;
+      z-index: 4;
+      top: 38px;
+      right: 9%;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 7px solid #f5d64e;
+      background: repeating-conic-gradient(
+        #fff7c9 0deg 40deg,
+        #f5d64e 41deg 44deg
+      );
+      box-shadow: inset 0 0 0 5px #fff3ac;
+    }
+
+    .cucumber {
+      position: absolute;
+      z-index: 4;
+      bottom: 32px;
+      right: 8%;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      border: 8px solid #438a46;
+      background: repeating-conic-gradient(
+        #d8eaa4 0deg 32deg,
+        #9ec46c 33deg 36deg
+      );
+      box-shadow: inset 0 0 0 5px #f0f7c9;
+    }
+
+    .product-label {
+      position: absolute;
+      z-index: 5;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      padding: 8px 3px;
+      color: var(--dark);
+      background: #ffffffcf;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    section {
+      padding: 75px 8%;
+      scroll-margin-top: 90px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+      color: var(--dark);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: #658269;
+    }
+
+    .ingredients {
+      background: var(--cream);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 23px;
+      border-radius: 22px;
+      border: 1px solid #e1edd7;
+      box-shadow: 0 10px 30px #205b3509;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px #205b3518;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .advantages {
+      background: #e8f3df;
+    }
+
+    .advantage-card {
+      background: #fafff5;
+    }
+
+    .note {
+      max-width: 780px;
+      margin: 30px auto 0;
+      text-align: center;
+      color: #55745a;
+      font-size: 0.88rem;
+    }
+
+    .about {
+      text-align: center;
+      background: linear-gradient(135deg, #fffdf2, #eff8e7);
+    }
+
+    .about-content {
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+
+    .about p {
+      margin-bottom: 24px;
+    }
+
+    footer {
+      padding: 35px 8%;
+      background: var(--dark);
+      color: #f4ffe9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer .logo {
+      color: white;
+    }
+
+    footer nav a {
+      border: none;
+      padding: 7px 10px;
+    }
+
+    footer nav a:hover {
+      background: #ffffff20;
+    }
+
+    footer small {
+      color: #d7e9d1;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        gap: 6px;
+      }
+
+      nav a {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 50px 7% 35px;
+        gap: 5px;
+      }
+
+      h1 {
+        font-size: clamp(3.2rem, 12vw, 4.7rem);
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .drink-scene {
+        min-height: 350px;
+        transform: scale(0.92);
+      }
+
+      .orb {
+        width: 290px;
+        height: 290px;
+      }
+
+      .glass {
+        width: 180px;
+        height: 290px;
+      }
+
+      section {
+        padding: 55px 6%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .card {
+        padding: 25px;
+      }
+
+      .card-icon {
+        font-size: 2.5rem;
+      }
+
+      footer {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="#home" class="logo" aria-label="Citrus Cloud home">
+      ☁ Citrus <span>Cloud.</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#ingredients">Ingredients</a>
+      <a href="#advantages">About</a>
+      <a href="#about">Contact Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Fresh • Cool • Creamy</div>
+        <h1>Citrus<br>Cloud<span style="color:#85b957">.</span></h1>
+
+        <p>
+          Your ultimate refreshment in every sip! Discover
+          <strong>Citrus Cloud</strong>, a delightful fusion of creamy 
+          yogurt drink, sparkling soda, and cool cucumber lemonade-flavored
+          palamig.
+        </p>
+
+        <p>
+          A hint of citrus, a touch fizz, and a burst of refreshing goodness in every sip.
+        </p>
+
+        <a class="btn" href="#ingredients">Discover Our Drink ↗</a>
+      </div>
+
+      <div class="drink-scene"
+           role="img"
+           aria-label="Illustration of a chilled green Citrus Cloud drink with lemon, cucumber, ice and bubbles">
+        <div class="orb"></div>
+        <span class="sparkle one">✦</span>
+        <span class="sparkle two">✧</span>
+        <span class="sparkle three">✳</span>
+        <div class="lemon"></div>
+        <div class="cucumber"></div>
+        <div class="glass">
+          <div class="ice"></div>
+          <div class="foam"></div>
+          <div class="product-label">CITRUS CLOUD</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ingredients" id="ingredients">
+      <div class="section-heading">
+        <h2>What's Inside? 🍃</h2>
+        <p>Three simple components. One refreshing combination.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <span class="card-icon" aria-hidden="true">🥛</span>
+          <h3>01. Yogurt Drink</h3>
+          <p>
+            Gives Citrus Cloud its creamy, smooth base and
+            a pleasant tangy flavor that balances the citrus.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-icon" aria-hidden="true">🫧</span>
+          <h3>02. Carbonated Soft Drink</h3>
+          <p>
+            Adds lively bubbles and a fizzy sensation,
+            making every sip feel fun and refreshing.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-icon" aria-hidden="true">🍋</span>
+          <h3>03. Cucumber Lemonade Palamig</h3>
+          <p>
+            Brings a cooling cucumber character with a bright,
+            citrusy lemonade flavor inspired by Filipino palamig.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="advantages" id="advantages">
+      <div class="section-heading">
+        <h2>Why Citrus Cloud? 💚</h2>
+        <p>Refreshment with a unique blend of flavors.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">❄️</span>
+          <h3>Cool & Refreshing</h3>
+          <p>
+            Best enjoyed chilled for a refreshing treat on
+            warm afternoons.
+          </p>
+        </article>
+
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">🍃</span>
+          <h3>Unique Flavor</h3>
+          <p>
+            A distinctive combination of creamy yogurt,
+            citrus, cucumber and sparkling fizz.
+          </p>
+        </article>
+
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">🥤</span>
+          <h3>Fun to Enjoy</h3>
+          <p>
+            A colorful, layered drink that can brighten
+            snack time and casual get-togethers.
+          </p>
+        </article>
+
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">🍋</span>
+          <h3>Citrusy Goodness</h3>
+          <p>
+            Lemon-inspired flavor gives the drink a bright,
+            zesty taste.
+          </p>
+        </article>
+
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">💚</span>
+          <h3>Creamy Meets Fizzy</h3>
+          <p>
+            Enjoy contrasting textures in one glass:
+            a creamy base and bubbly refreshment.
+          </p>
+        </article>
+
+        <article class="card advantage-card">
+          <span class="card-icon" aria-hidden="true">✨</span>
+          <h3>Made to Stand Out</h3>
+          <p>
+            Its fresh green appearance makes it a memorable
+            choice for parties, stalls and special occasions.
+          </p>
+        </article>
+      </div>
+
+      <p class="note">
+        Note: Citrus Cloud is a refreshing beverage, not a medicine.
+        Its nutritional value depends on the ingredients and portions
+        used. Ask our group for sugar, dairy and allergen information.
+      </p>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-content">
+        <div class="eyebrow">A Fresh Twist on Palamig</div>
+        <h2>Meet Citrus Cloud.</h2>
+        <p>
+          Inspired by thecomforting flavors of Filipino palamig,
+          Citrus Cloud brings a fun and refreshing twist to a beloved classic.
+          Combining creamy yogurt drink, fizzy carboonated soda,
+          and the cool, zesty taste of cucumber lemonade,
+		  this unique green drink offers a delightful blend of flavors in every sip.
+        </p>
+        <p>
+          Whether you're taking a quick break, enjoying snacks with friends,
+          or or simply craving something new, Citrus Cloud is here to 
+          brighten your day with a refreshing burst of flavor.
+        </p>
+        
+      </div>
+    </section>
+  </main>
+
+<!-- CONTACT SECTION -->
+        <section id="contact">
+            <span class="tag">YOUR NEXT FAVORITE SIP</span>
+
+            <h2 class="section-title">Get Your Citrus Cloud</h2>
+
+            <p class="section-description">
+                Ready to to add a refreshing twist to your day?
+               Get in touch with us to learn more about about Citrus Cloud.
+            </p>
+
+            <!-- Replace the sample details with your own. -->
+            <p style="margin-bottom: 8px;">
+             
+            </p>
+
+            <p style="margin-bottom: 25px;">
+                <strong>Instagram:</strong><a href="https://www.instagram.com/citruscloud.official/" target="_blank">@citruscloud.official</a>
+			</p>
+                                                                 <a class="btn" href="#home">Back to the Top ↑</a>
+        </section>
+    </main>
+
+
+
+  <footer>
+    <div>
+      <div class="logo">☁ Citrus Cloud<span>.</span></div>
+      <small>Refreshment in Every Sip.</small>
+    </div>
+
+    <nav aria-label="Footer navigation">
+      <a href="#home">Home</a>
+      <a href="#ingredients">Ingredients</a>
+      <a href="#advantages">Advantages</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <small>© 2026 Citrus Cloud. All rights reserved.</small>
+  </footer>
+
+</body>
+</html>
